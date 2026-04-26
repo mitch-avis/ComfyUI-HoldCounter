@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "comfyui-holdcounter"
+version = "1.0.0"
+description = "A ComfyUI custom node that emits a held, range-bound, optionally-looping integer index — useful as a Load Image batch index that advances every N runs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Mitch" }]
+keywords = ["comfyui", "comfy", "custom-node", "counter", "batch", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/mitch-avis/ComfyUI-HoldCounter"
+Repository = "https://github.com/mitch-avis/ComfyUI-HoldCounter"
+Issues = "https://github.com/mitch-avis/ComfyUI-HoldCounter/issues"
+
+# ComfyUI Registry / Manager metadata.
+# See: https://docs.comfy.org/registry/overview
+[tool.comfy]
+PublisherId = "mitch-avis"
+DisplayName = "ComfyUI-HoldCounter"
+Icon = ""
+includes = ["web"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["hold_counter"]
+
+[tool.hatch.build.targets.wheel.sources]
+"." = "hold_counter"
+
+[tool.hatch.build.targets.wheel.force-include]
+"web" = "hold_counter/web"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RET", "RUF"]
