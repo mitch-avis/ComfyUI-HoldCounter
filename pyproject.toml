@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "comfyui-holdcounter"
-version = "2.0.2"
+version = "2.0.3"
 description = """A ComfyUI custom node that emits a held, range-bound integer index with multiple \
 advancement modes (loop, clamp, pingpong, random, shuffle) — useful as a Load Image batch index \
 that advances every N runs."""

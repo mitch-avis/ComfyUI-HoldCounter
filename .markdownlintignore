@@ -1,0 +1,4 @@
+.venv/
+.git/
+node_modules/
+htmlcov/

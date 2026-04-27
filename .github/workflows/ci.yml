@@ -9,9 +9,9 @@ on:
 permissions:
   contents: read
 
-# setup-uv (and many other JS actions) still bundle Node.js 20, which GitHub is
-# deprecating. Opt into Node.js 24 now so we don't get the deprecation warning
-# and are ready for the June 2nd, 2026 forced switchover.
+# setup-uv (and many other JS actions) still bundle Node.js 20, which GitHub is deprecating. Opt
+# into Node.js 24 now so we don't get the deprecation warning and are ready for the June 2nd, 2026
+# forced switchover.
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 

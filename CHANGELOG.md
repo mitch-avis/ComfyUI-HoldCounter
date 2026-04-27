@@ -6,6 +6,34 @@ All notable changes to **ComfyUI-HoldCounter** are documented here. The format i
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] — 2026-04-26
+
+No runtime changes — release covers CI hardening, repository governance, and lint config.
+
+### Added
+
+- `.markdownlint.json` and `.markdownlintignore` so `markdownlint-cli2` honours the project's
+  100-char line length (with code blocks, tables, and headings exempt) and skips `.venv/`.
+- `.github/workflows/dependabot-auto-merge.yml` — auto-merges minor/patch Dependabot PRs once CI
+  passes; major bumps still require manual review.
+- Branch ruleset `main-protection` (configured via the GitHub API, not in-tree): blocks deletion
+  and force-pushes, enforces linear history and PR-only changes, and requires the three Python CI
+  jobs to pass before merge.
+
+### Changed
+
+- CI: pinned `astral-sh/setup-uv` to `v8.1.0` (v8 dropped floating major tags for supply-chain
+  hardening) and set `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"` at workflow scope to clear the
+  Node.js 20 deprecation warnings ahead of the June 2nd, 2026 forced switchover.
+- CI: bumped `actions/checkout` to `v6` (Dependabot PR #2). Only material change is
+  `persist-credentials` moving to `$RUNNER_TEMP`, which doesn't affect this workflow.
+
+### Fixed
+
+- Root `__init__.py` now tolerates both ComfyUI's `spec_from_file_location` (relative import) and
+  pytest's standalone import (absolute import via `pythonpath = ["."]`), preventing a regression
+  of the v2.0.2 CI failure if the rootdir gets re-imported as a non-package.
+
 ## [2.0.2] — 2026-04-26
 
 ### Fixed
