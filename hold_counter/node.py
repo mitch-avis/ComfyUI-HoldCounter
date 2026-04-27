@@ -76,7 +76,7 @@ class NodeState:
     last_reset_token: int = 0
     cached_tick: int | None = None
     cached_index: int | None = None
-    perm: list[int] = field(default_factory=list)
+    perm: list[int] = field(default_factory=list[int])
     perm_seed: int = 0
     perm_pass: int = 0
 

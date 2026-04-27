@@ -3,8 +3,8 @@ import { ComfyWidgets } from "../../scripts/widgets.js";
 
 // Frontend extension for the HoldCounter Python node:
 //   * displays the current `index` value in the node body each run,
-//   * provides a momentary "Reset" button that increments the hidden `reset_trigger`
-//     widget so the Python side knows to rewind the per-node counter,
+//   * provides a momentary "Reset" button that increments the hidden `reset_trigger` widget so the
+//     Python side knows to rewind the per-node counter,
 //   * hides the `reset_trigger` widget from the UI so users only see the button.
 app.registerExtension({
     name: "HoldCounter.UI",
@@ -47,7 +47,8 @@ app.registerExtension({
             widget._hcHidden = true;
             widget.type = "hidden";
             widget.computeSize = () => [0, -4];
-            // Hide any DOM element backing it (none for INT, but defensive for future widget types).
+            // Hide any DOM element backing it (none for INT, but defensive for future widget
+            // types).
             if (widget.inputEl) widget.inputEl.style.display = "none";
         }
 

@@ -1,65 +1,149 @@
 {
-  "last_node_id": 3,
-  "last_link_id": 2,
-  "nodes": [
-    {
-      "id": 1,
-      "type": "HoldCounter",
-      "pos": [200, 200],
-      "size": [260, 220],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        { "name": "index", "type": "INT", "links": [1], "slot_index": 0 },
-        { "name": "index_str", "type": "STRING", "links": [2], "slot_index": 1 }
-      ],
-      "properties": { "Node name for S&R": "HoldCounter" },
-      "widgets_values": [2, 0, 4, "loop", "{:04d}", 0, ""]
+    "config": {},
+    "extra": {
+        "info": {
+            "description": "HoldCounter feeding both an INT (e.g. a Load Image batch index) and a zero-padded STRING (e.g. a filename prefix). Configure runs_per_index to control how many runs each index is held for.",
+            "name": "Hold Counter — basic"
+        }
     },
-    {
-      "id": 2,
-      "type": "LoadImage",
-      "pos": [520, 200],
-      "size": [320, 314],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        { "name": "image", "type": "IMAGE", "link": null, "widget": { "name": "image" } }
-      ],
-      "outputs": [
-        { "name": "IMAGE", "type": "IMAGE", "links": null },
-        { "name": "MASK", "type": "MASK", "links": null }
-      ],
-      "properties": { "Node name for S&R": "LoadImage" },
-      "widgets_values": ["example.png", "image"]
-    },
-    {
-      "id": 3,
-      "type": "PreviewAny",
-      "pos": [520, 540],
-      "size": [320, 80],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [{ "name": "source", "type": "*", "link": 2 }],
-      "outputs": [],
-      "properties": { "Node name for S&R": "PreviewAny" }
-    }
-  ],
-  "links": [
-    [1, 1, 0, 2, 0, "INT"],
-    [2, 1, 1, 3, 0, "STRING"]
-  ],
-  "groups": [],
-  "config": {},
-  "extra": {
-    "info": {
-      "name": "Hold Counter — basic",
-      "description": "HoldCounter feeding both an INT (e.g. a Load Image batch index) and a zero-padded STRING (e.g. a filename prefix). Configure runs_per_index to control how many runs each index is held for."
-    }
-  },
-  "version": 0.4
+    "groups": [],
+    "last_link_id": 2,
+    "last_node_id": 3,
+    "links": [
+        [
+            1,
+            1,
+            0,
+            2,
+            0,
+            "INT"
+        ],
+        [
+            2,
+            1,
+            1,
+            3,
+            0,
+            "STRING"
+        ]
+    ],
+    "nodes": [
+        {
+            "flags": {},
+            "id": 1,
+            "inputs": [],
+            "mode": 0,
+            "order": 0,
+            "outputs": [
+                {
+                    "links": [
+                        1
+                    ],
+                    "name": "index",
+                    "slot_index": 0,
+                    "type": "INT"
+                },
+                {
+                    "links": [
+                        2
+                    ],
+                    "name": "index_str",
+                    "slot_index": 1,
+                    "type": "STRING"
+                }
+            ],
+            "pos": [
+                200,
+                200
+            ],
+            "properties": {
+                "Node name for S&R": "HoldCounter"
+            },
+            "size": [
+                260,
+                220
+            ],
+            "type": "HoldCounter",
+            "widgets_values": [
+                2,
+                0,
+                4,
+                "loop",
+                "{:04d}",
+                0,
+                ""
+            ]
+        },
+        {
+            "flags": {},
+            "id": 2,
+            "inputs": [
+                {
+                    "link": null,
+                    "name": "image",
+                    "type": "IMAGE",
+                    "widget": {
+                        "name": "image"
+                    }
+                }
+            ],
+            "mode": 0,
+            "order": 1,
+            "outputs": [
+                {
+                    "links": null,
+                    "name": "IMAGE",
+                    "type": "IMAGE"
+                },
+                {
+                    "links": null,
+                    "name": "MASK",
+                    "type": "MASK"
+                }
+            ],
+            "pos": [
+                520,
+                200
+            ],
+            "properties": {
+                "Node name for S&R": "LoadImage"
+            },
+            "size": [
+                320,
+                314
+            ],
+            "type": "LoadImage",
+            "widgets_values": [
+                "example.png",
+                "image"
+            ]
+        },
+        {
+            "flags": {},
+            "id": 3,
+            "inputs": [
+                {
+                    "link": 2,
+                    "name": "source",
+                    "type": "*"
+                }
+            ],
+            "mode": 0,
+            "order": 2,
+            "outputs": [],
+            "pos": [
+                520,
+                540
+            ],
+            "properties": {
+                "Node name for S&R": "PreviewAny"
+            },
+            "size": [
+                320,
+                80
+            ],
+            "type": "PreviewAny"
+        }
+    ],
+    "version": 0.4
 }

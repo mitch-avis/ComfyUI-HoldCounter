@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "comfyui-holdcounter"
-version = "2.0.0"
+version = "2.0.1"
 description = """A ComfyUI custom node that emits a held, range-bound integer index with multiple \
 advancement modes (loop, clamp, pingpong, random, shuffle) — useful as a Load Image batch index \
 that advances every N runs."""
@@ -51,12 +51,6 @@ includes = ["web"]
 [tool.hatch.build.targets.wheel]
 packages = ["hold_counter"]
 
-[tool.hatch.build.targets.wheel.sources]
-"." = "hold_counter"
-
-[tool.hatch.build.targets.wheel.force-include]
-"web" = "hold_counter/web"
-
 [tool.ruff]
 line-length = 100
 target-version = "py310"
@@ -67,7 +61,7 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM", "RET", "RUF"]
 ignore = ["N802"]
 
 [tool.pyright]
-include = ["hold_counter_node.py", "__init__.py", "tests"]
+include = ["hold_counter", "__init__.py", "tests"]
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "standard"

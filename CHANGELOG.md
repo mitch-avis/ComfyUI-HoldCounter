@@ -1,8 +1,24 @@
+<!-- markdownlint-disable MD024 -->
+
 # Changelog
 
 All notable changes to **ComfyUI-HoldCounter** are documented here. The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.1] — 2026-04-26
+
+### Changed
+
+- Restructured Python sources into a proper `hold_counter/` subpackage. The top-level `__init__.py`
+  is now a thin ComfyUI entry point; implementation lives in `hold_counter/node.py`. No public
+  behaviour change.
+
+### Fixed
+
+- Pyright `reportUnknownVariableType` on `NodeState.perm` (typed the dataclass `default_factory`
+  explicitly).
+- CHANGELOG markdownlint MD024 (duplicate headings) — disabled per-file via comment.
 
 ## [2.0.0] — 2026-04-26
 
@@ -72,6 +88,7 @@ wired to anything downstream.
 - Initial release: integer counter that holds each value for `runs_per_index` consecutive queue
   runs.
 
+[2.0.1]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v2.0.1
 [2.0.0]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v2.0.0
 [1.1.1]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v1.1.1
 [1.1.0]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v1.1.0
