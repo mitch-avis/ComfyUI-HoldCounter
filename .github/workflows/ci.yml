@@ -22,27 +22,30 @@ jobs:
       matrix:
         python-version: [ "3.10", "3.11", "3.12" ]
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@v3
-      with:
-        enable-cache: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
 
-    - name: Set up Python ${{ matrix.python-version }}
-      run: uv python install ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
 
-    - name: Install project (with dev extras)
-      run: uv sync --python ${{ matrix.python-version }} --extra dev || uv pip install --python ${{ matrix.python-version }} --system -e ".[dev]"
+      - name: Install project (with dev extras)
+        run: uv sync --python ${{ matrix.python-version }} --extra dev || uv pip install
+          --python ${{ matrix.python-version }} --system -e ".[dev]"
 
-    - name: ruff format --check
-      run: uv tool run ruff format --check .
+      - name: ruff format --check
+        run: uv tool run ruff format --check .
 
-    - name: ruff check
-      run: uv tool run ruff check .
+      - name: ruff check
+        run: uv tool run ruff check .
 
-    - name: pyright
-      run: uv run --with pyright pyright .
+      - name: pyright
+        run: uv run --with pyright pyright .
 
-    - name: pytest
-      run: uv run --with pytest --with pytest-cov pytest --cov=. --cov-report=term-missing
+      - name: pytest
+        run: uv run --with pytest --with pytest-cov pytest --cov=.
+          --cov-report=term-missing
