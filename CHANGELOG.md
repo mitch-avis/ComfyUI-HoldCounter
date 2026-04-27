@@ -6,6 +6,16 @@ All notable changes to **ComfyUI-HoldCounter** are documented here. The format i
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.6] — 2026-04-27
+
+### Fixed
+
+- `format` widget value wasn't reliably reaching `execute()` because it was declared in the
+  `optional` group of `INPUT_TYPES`. Some ComfyUI builds render/serialize optional widgets
+  differently than required ones, so the user-typed format string was being dropped and the
+  default `"{}"` was used instead, causing `index_str` to emit raw integers (e.g. `"2"` rather
+  than `"frame_0002"`). Moved `format` to `required`.
+
 ## [2.0.5] — 2026-04-26
 
 ### Fixed

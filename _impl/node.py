@@ -139,9 +139,9 @@ class HoldCounter:
                     {"default": 1, "min": 0, "max": 1_000_000, "step": 1},
                 ),
                 "mode": (list(MODES), {"default": DEFAULT_MODE}),
+                "format": ("STRING", {"default": "{}", "multiline": False}),
             },
             "optional": {
-                "format": ("STRING", {"default": "{}", "multiline": False}),
                 # Hidden trigger widget — incremented by the JS reset button.
                 "reset_trigger": (
                     "INT",
