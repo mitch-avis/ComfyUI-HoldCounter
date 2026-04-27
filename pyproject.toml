@@ -4,8 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "comfyui-holdcounter"
-version = "1.1.1"
-description = "A ComfyUI custom node that emits a held, range-bound, optionally-looping integer index — useful as a Load Image batch index that advances every N runs."
+version = "2.0.0"
+description = """A ComfyUI custom node that emits a held, range-bound integer index with multiple \
+advancement modes (loop, clamp, pingpong, random, shuffle) — useful as a Load Image batch index \
+that advances every N runs."""
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
@@ -24,17 +26,26 @@ classifiers = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "pytest-sugar>=1",
+    "ruff>=0.6",
+    "pyright>=1.1",
+]
+
 [project.urls]
 Homepage = "https://github.com/mitch-avis/ComfyUI-HoldCounter"
 Repository = "https://github.com/mitch-avis/ComfyUI-HoldCounter"
 Issues = "https://github.com/mitch-avis/ComfyUI-HoldCounter/issues"
 
-# ComfyUI Registry / Manager metadata.
-# See: https://docs.comfy.org/registry/overview
+# ComfyUI Registry / Manager metadata. See: https://docs.comfy.org/registry/overview
 [tool.comfy]
 PublisherId = "mitch-avis"
 DisplayName = "ComfyUI-HoldCounter"
 Icon = ""
+tags = ["utils", "batch", "automation", "counter"]
 includes = ["web"]
 
 [tool.hatch.build.targets.wheel]
@@ -52,3 +63,15 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "RET", "RUF"]
+# INPUT_TYPES / IS_CHANGED are required ComfyUI API names.
+ignore = ["N802"]
+
+[tool.pyright]
+include = ["hold_counter_node.py", "__init__.py", "tests"]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "standard"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
