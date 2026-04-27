@@ -68,4 +68,4 @@ typeCheckingMode = "standard"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra --import-mode=importlib"
+addopts = "-ra --import-mode=importlib --ignore=__init__.py"
