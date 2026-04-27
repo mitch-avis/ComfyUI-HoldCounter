@@ -18,8 +18,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   deprecation warnings.
 - CI: `setup-uv` no longer fails with "No file matched [**/uv.lock]" — the cache dependency glob is
   pinned to `pyproject.toml` since `uv.lock` is gitignored.
-- CI: `pytest --import-mode=importlib` so the test runner doesn't synthesise a Package collector
-  for the rootdir.
+- CI: `pytest --import-mode=importlib` so the test runner doesn't synthesise a Package collector for
+  the rootdir.
 
 ## [2.0.1] — 2026-04-26
 
