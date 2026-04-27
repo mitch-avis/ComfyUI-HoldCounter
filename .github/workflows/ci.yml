@@ -28,7 +28,7 @@ jobs:
       matrix:
         python-version: [ "3.10", "3.11", "3.12" ]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Install uv
         # setup-uv v8 dropped floating major/minor tags; pin to an immutable tag.
