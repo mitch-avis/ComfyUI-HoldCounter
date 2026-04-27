@@ -77,9 +77,7 @@ class HoldCounter:
             _STATE["count"] = 0
 
         # Normalize so lo <= hi even if the user inverts the range.
-        lo, hi = (
-            (min_index, max_index) if min_index <= max_index else (max_index, min_index)
-        )
+        lo, hi = (min_index, max_index) if min_index <= max_index else (max_index, min_index)
         range_size = hi - lo + 1
 
         raw = _STATE["count"] // runs_per_index
