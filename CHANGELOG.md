@@ -6,6 +6,17 @@ All notable changes to **ComfyUI-HoldCounter** are documented here. The format i
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.4] — 2026-04-26
+
+### Fixed
+
+- Read-only `current_index` display widget rendered the literal string `"false"` and never
+  updated on some ComfyUI builds. Replaced the `ComfyWidgets["STRING"]` wrapper (whose return
+  shape varies between ComfyUI versions) with a LiteGraph-native `addWidget("text", …,
+  { serialize: false })` widget marked `disabled = true`. The widget is now created
+  idempotently in both `onNodeCreated` and `onConfigure`, and its value is updated from
+  `onExecuted` after every queue run.
+
 ## [2.0.3] — 2026-04-26
 
 No runtime changes — release covers CI hardening, repository governance, and lint config.
