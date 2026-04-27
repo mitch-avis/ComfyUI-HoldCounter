@@ -5,8 +5,8 @@ import { ComfyWidgets } from "../../scripts/widgets.js";
 //   * adds a momentary "reset" button that increments the hidden `reset_trigger` widget so the
 //     Python side knows to rewind this node's counter,
 //   * hides the `reset_trigger` integer widget so users only see the button,
-//   * shows the most recent emitted index in the node body via a read-only single-row textarea
-//     that we update from `onExecuted`.
+//   * shows the most recent emitted index in the node body via a read-only single-row textarea that
+//     we update from `onExecuted`.
 //
 // Why a multiline STRING widget styled as a single line? Because LiteGraph's canvas-drawn "text"
 // widget stops painting its value when `disabled = true` (you only see the label). The multiline
@@ -59,8 +59,8 @@ function ensureDisplayWidget(node) {
         return widget;
     }
 
-    // Multiline STRING widget gives us a real <textarea> DOM element that always renders,
-    // unlike a canvas-drawn "text" widget which hides its value when disabled.
+    // Multiline STRING widget gives us a real <textarea> DOM element that always renders, unlike a
+    // canvas-drawn "text" widget which hides its value when disabled.
     const created = ComfyWidgets["STRING"](
         node,
         DISPLAY,
