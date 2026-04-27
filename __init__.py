@@ -7,8 +7,8 @@ The ``try / except ImportError`` covers two import contexts:
 
 * **ComfyUI** loads this file via :func:`importlib.util.spec_from_file_location` with the
   surrounding directory as a package, so the relative ``from ._impl …`` form succeeds.
-* **pytest** synthesises a ``Package`` collector for the rootdir and imports ``__init__.py`` with
-  no parent package. The relative form raises and the absolute fallback (which works because
+* **pytest** synthesises a ``Package`` collector for the rootdir and imports ``__init__.py`` with no
+  parent package. The relative form raises and the absolute fallback (which works because
   ``pythonpath = ["."]`` is set in ``pyproject.toml``) takes over.
 """
 
