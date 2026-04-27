@@ -1,15 +1,17 @@
 import { app } from "../../scripts/app.js";
+import { ComfyWidgets } from "../../scripts/widgets.js";
 
 // Frontend extension for the HoldCounter Python node:
 //   * adds a momentary "reset" button that increments the hidden `reset_trigger` widget so the
 //     Python side knows to rewind this node's counter,
 //   * hides the `reset_trigger` integer widget so users only see the button,
-//   * shows the most recent emitted index in the node body via a non-serialised text widget that
-//     we update from `onExecuted`.
+//   * shows the most recent emitted index in the node body via a read-only single-row textarea
+//     that we update from `onExecuted`.
 //
-// The display widget uses LiteGraph's built-in "text" widget type (rather than ComfyWidgets'
-// STRING wrapper) because the latter's return shape varies between ComfyUI versions and was
-// silently leaving the widget at its falsy default ("false" rendered) on some builds.
+// Why a multiline STRING widget styled as a single line? Because LiteGraph's canvas-drawn "text"
+// widget stops painting its value when `disabled = true` (you only see the label). The multiline
+// STRING widget creates a real DOM <textarea> via `ComfyWidgets["STRING"]`, which always renders
+// regardless of disabled state — the same trick used by ShowText / pysssss-style display nodes.
 
 const TRIGGER = "reset_trigger";
 const DISPLAY = "current_index";
@@ -38,23 +40,52 @@ function ensureResetButton(node) {
     });
 }
 
+function styleAsReadOnlyOneLiner(widget) {
+    const el = widget?.inputEl;
+    if (!el) return;
+    el.readOnly = true;
+    el.style.opacity = "0.75";
+    el.style.cursor = "default";
+    // Single-row look: kill scrollbars and lock height to one line.
+    el.style.overflow = "hidden";
+    el.rows = 1;
+    el.style.resize = "none";
+}
+
 function ensureDisplayWidget(node) {
     let widget = findWidget(node, DISPLAY);
-    if (widget) return widget;
+    if (widget) {
+        styleAsReadOnlyOneLiner(widget);
+        return widget;
+    }
 
-    // LiteGraph "text" widget: editable text input. Marked serialize:false so it never gets
-    // saved/restored from the workflow JSON, and disabled so the user can't type into it.
-    widget = node.addWidget("text", DISPLAY, "", () => {}, { serialize: false });
-    widget.disabled = true;
+    // Multiline STRING widget gives us a real <textarea> DOM element that always renders,
+    // unlike a canvas-drawn "text" widget which hides its value when disabled.
+    const created = ComfyWidgets["STRING"](
+        node,
+        DISPLAY,
+        ["STRING", { multiline: true, default: "" }],
+        app,
+    );
+    widget = created?.widget ?? findWidget(node, DISPLAY);
+    if (!widget) return null;
+
+    widget.value = "";
+    // Don't persist the live display value into the saved workflow.
+    widget.serializeValue = () => "";
+    styleAsReadOnlyOneLiner(widget);
+    // The DOM element is created asynchronously on some builds — re-apply once next frame.
+    requestAnimationFrame(() => styleAsReadOnlyOneLiner(widget));
     return widget;
 }
 
 function updateDisplay(node, value) {
     const widget = ensureDisplayWidget(node);
     if (!widget) return;
-    widget.value = String(value);
-    if (widget.inputEl) widget.inputEl.value = widget.value;
-    node.setDirtyCanvas(true, true);
+    const text = String(value);
+    widget.value = text;
+    if (widget.inputEl) widget.inputEl.value = text;
+    app.graph.setDirtyCanvas(true, true);
 }
 
 app.registerExtension({

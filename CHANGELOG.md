@@ -6,6 +6,17 @@ All notable changes to **ComfyUI-HoldCounter** are documented here. The format i
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.5] — 2026-04-26
+
+### Fixed
+
+- `current_index` display widget rendered only its label and never the value. Root cause: a
+  LiteGraph canvas-drawn `"text"` widget with `disabled = true` paints just the label and skips
+  the value. Switched to a multiline `ComfyWidgets["STRING"]` widget styled as a single-row
+  read-only field (the same DOM-`<textarea>` trick used by ShowText-style nodes), which always
+  renders regardless of disabled state. Added a `requestAnimationFrame` re-style pass to handle
+  builds where the DOM element is created asynchronously.
+
 ## [2.0.4] — 2026-04-26
 
 ### Fixed
