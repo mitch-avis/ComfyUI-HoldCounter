@@ -6,6 +6,21 @@ All notable changes to **ComfyUI-HoldCounter** are documented here. The format i
 Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] — 2026-04-26
+
+### Fixed
+
+- CI: pytest collection failed because pytest treats the rootdir as a Package (it has the
+  ComfyUI-required `__init__.py`) and the subpackage's name (`hold_counter`) clashed with the
+  rootdir's directory name in local checkouts. Renamed the implementation subpackage to `_impl/` to
+  remove the ambiguity.
+- CI: `actions/checkout@v4` → `@v5` and `astral-sh/setup-uv@v3` → `@v6` to clear the Node.js 20
+  deprecation warnings.
+- CI: `setup-uv` no longer fails with "No file matched [**/uv.lock]" — the cache dependency glob is
+  pinned to `pyproject.toml` since `uv.lock` is gitignored.
+- CI: `pytest --import-mode=importlib` so the test runner doesn't synthesise a Package collector
+  for the rootdir.
+
 ## [2.0.1] — 2026-04-26
 
 ### Changed
@@ -88,6 +103,7 @@ wired to anything downstream.
 - Initial release: integer counter that holds each value for `runs_per_index` consecutive queue
   runs.
 
+[2.0.2]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v2.0.2
 [2.0.1]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v2.0.1
 [2.0.0]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v2.0.0
 [1.1.1]: https://github.com/mitch-avis/ComfyUI-HoldCounter/releases/tag/v1.1.1

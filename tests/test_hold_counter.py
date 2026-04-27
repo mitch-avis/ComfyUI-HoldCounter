@@ -1,4 +1,4 @@
-"""Pytest suite for the pure compute helpers in :mod:`hold_counter.node`.
+"""Pytest suite for the pure compute helpers in :mod:`_impl.node`.
 
 The math is intentionally factored into pure functions so it can be exercised without importing
 ComfyUI. The class itself is covered indirectly through these tests.
@@ -13,7 +13,7 @@ import pytest
 # Make the repo root importable when running pytest from anywhere.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-mod = importlib.import_module("hold_counter.node")
+mod = importlib.import_module("_impl.node")
 compute_index = mod._compute_index  # type: ignore[attr-defined]
 NodeState = mod.NodeState
 
