@@ -32,7 +32,7 @@ jobs:
 
       - name: Install uv
         # setup-uv v8 dropped floating major/minor tags; pin to an immutable tag.
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@v8.3.2
         with:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
